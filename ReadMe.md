@@ -10,8 +10,8 @@ This project is covered by the [MIT License](http://opensource.org/licenses/MIT 
 
 ### What is this repository for? ###
 
-* A quick and simple command line utility for moving horizon data between various astronomical software and file formats.
-* Current version is: 0.0 pre-release; API not frozen, expect breaking changes.
+* Horizon data. Interchange. A quick and simple command line utility for moving horizon data between various astronomical software and file formats.
+* Current version is: 0.0 pre-release; API not frozen, expect breaking changes, anything goes.
 
 ### Usage Example ###
     horizon.exe -source Astroplanner -SourceFile ExportedHorizon.csv -destination ACP
@@ -31,6 +31,13 @@ This project is covered by the [MIT License](http://opensource.org/licenses/MIT 
 * We try hard to work test-first and we encourage you to do the same. If you haven't done this before, it can take some getting used to. Why not use this project as an excuse to learn?
 * We're very informal, but we will review all pull requests before accepting them. We used to be afraid of code reviews, but we realise now that constructive criticism is a good thing. Anyone can participate in code reviews but please keep it constructive. We don't care if you don't like the layout of braces. We do care if an O(n-squared) algorithm is used when an O(n) algorithm would have done the job.
 * Please try to write Clean Code and stick to the SOLID principles of object oriented design.
+* We use ***GitFlow*** as our branching strategy, it has worked very well for us across a number of projects. The bare minimum you must know about GitFlow to get started is:
+	* The `master` branch is reserved for releases. Commits to `master` are disabled.
+	* Development happens on the `develop` branch, or preferably a feature branch off develop. Feature branches are conventionally named `feature/name-of-feature`.
+	* As far as possible, do one feature per branch and then merge it back into `develop`.
+	* Find out all the gory details at [http://nvie.com/posts/a-successful-git-branching-model/](http://nvie.com/posts/a-successful-git-branching-model/ "GitFlow - a successful Git branching strategy")
+	* We are not a fan of rebasing. Push everything, so everyone can see what happened.
+* If you commit *binaries* or *build artefacts* to the *source code repository*, we will hunt you down and give you the wedgie you deserve!
 
 ### Who do I talk to? ###
 
