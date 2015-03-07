@@ -134,6 +134,7 @@
     <Compile Include="HorizonAppOptions.cs" />
     <Compile Include="HorizonApp.cs" />
     <Compile Include="HorizonData.cs" />
+    <Compile Include="Importers\AstroplannerImporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

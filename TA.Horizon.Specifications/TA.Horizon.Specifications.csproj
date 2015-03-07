@@ -52,10 +52,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HorizonDataSpecs.cs" />
+    <Compile Include="HorizonImportSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="TestData\AstroPlanner.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TA.Horizon\TA.Horizon.csproj">
