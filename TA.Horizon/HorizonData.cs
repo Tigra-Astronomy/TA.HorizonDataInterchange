@@ -11,10 +11,10 @@ using System.Linq;
 
 namespace TA.Horizon
     {
-    public class HorizonData : Dictionary<int, double>
+    public class HorizonData : Dictionary<int, HorizonDatum>
         {
         /// <exception cref="IndexOutOfRangeException" accessor="set">Horizon index must be in the range 0..359 degrees.</exception>
-        public new double this[int index]
+        public new HorizonDatum this[int index]
             {
             get
                 {
@@ -30,7 +30,7 @@ namespace TA.Horizon
                 }
             }
 
-        double InterpolatedHorizonValueForAzimuth(int index)
+        HorizonDatum InterpolatedHorizonValueForAzimuth(int index)
             {
             // First handle the simple case where a data point exists at the requested index; simply return it.
             if (base.ContainsKey(index)) return base[index];
@@ -63,14 +63,14 @@ namespace TA.Horizon
                 upperKey = lowerOrEqualKeys.First();
                 upperKeyAzimuth = 360 + upperKey;
                 }
-            var lowerValue = base[lowerKey];
-            var upperValue = base[upperKey];
+            var lowerValue = base[lowerKey].HorizonAltitude;
+            var upperValue = base[upperKey].HorizonAltitude;
             var azimuthDelta = upperKeyAzimuth - lowerKeyAzimuth; // Takes account of any 'wrap'.
             var valueDelta = upperValue - lowerValue;
             var slope = valueDelta/azimuthDelta;
             var indexOffset = index - lowerKeyAzimuth;
             var interpolatedValue = lowerValue + indexOffset*slope; // y = mx + c, equation of a straight line.
-            return interpolatedValue;
+            return new HorizonDatum(interpolatedValue, 0.0);
             }
         }
     }

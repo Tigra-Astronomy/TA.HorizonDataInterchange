@@ -30,7 +30,7 @@ namespace TA.Horizon.Importers
                     var azimuth = int.Parse(parts[0]);
                     var horizon = double.Parse(parts[1]);
                     var lightDome = double.Parse(parts[2]);
-                    horizonData[azimuth] = horizon;
+                    horizonData[azimuth] = new HorizonDatum(horizon, lightDome);
                     }
                 }
             return horizonData;
