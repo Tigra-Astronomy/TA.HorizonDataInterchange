@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcpExporterSpecs.cs" />
     <Compile Include="HorizonDataSpecs.cs" />
     <Compile Include="HorizonImportSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

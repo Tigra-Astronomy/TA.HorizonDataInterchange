@@ -6,6 +6,7 @@
 
 using System;
 using CommandLine;
+using TA.Horizon.Importers;
 
 namespace TA.Horizon
     {
@@ -25,10 +26,5 @@ namespace TA.Horizon
             {
             throw new NotImplementedException();
             }
-        }
-
-    public interface IHorizonImporter
-        {
-        HorizonData ImportHorizon();
         }
     }
