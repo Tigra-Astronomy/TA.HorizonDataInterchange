@@ -28,7 +28,7 @@ namespace TA.Horizon.Exporters
             for (int azimuth = 0; azimuth < 360; azimuth+=2)
                 {
                 var altitude = data[azimuth];
-                builder.AppendFormat("{0:F1} ", altitude);
+                builder.AppendFormat("{0:F1} ", altitude.HorizonAltitude);
                 }
             builder.Length--;   // Removes the trailing space
             writer.SetKey("Horizon", builder);

@@ -16,7 +16,7 @@ namespace TA.Horizon.RegistryWriters
             {
             using (var rootKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
                 {
-                using (var regKey = rootKey.OpenSubKey(AcpObservatoryKey))
+                using (var regKey = rootKey.OpenSubKey(AcpObservatoryKey, true))
                     {
                     regKey.SetValue(name, value.ToString());
                     }
