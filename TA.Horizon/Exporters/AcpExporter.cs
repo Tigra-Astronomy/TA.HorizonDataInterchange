@@ -18,7 +18,15 @@ namespace TA.Horizon.Exporters
 
         public void ExportHorizon(HorizonData data)
             {
-            
+            var builder = new StringBuilder();
+            for (int azimuth = 0; azimuth < 360; azimuth+=2)
+                {
+                var altitude = data[azimuth];
+                builder.AppendFormat("{0:F1} ", altitude);
+                }
+            builder.Length--;   // Removes the trailing space
+            var registryValue = builder.ToString();
+            writer.SetKey("Horizon", registryValue);
             }
         }
     }
