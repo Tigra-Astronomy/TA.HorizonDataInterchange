@@ -10,13 +10,6 @@ namespace TA.Horizon
     {
     public class HorizonAppOptions
         {
-        [Option("Source", Required = true, HelpText = "Specifies which program is to supply the source data")]
-        public string Source { get; set; }
-        [Option("IncludeLightDome",
-            HelpText =
-                "Includes the light dome as part of the solid horizon, if light dome data is present. Ignored if there is no light dome data."
-            )]
-        public bool IncludeLightDome { get; set; }
         [Option('s', "SourceFile")]
         public string SourceFile { get; set; }
         }

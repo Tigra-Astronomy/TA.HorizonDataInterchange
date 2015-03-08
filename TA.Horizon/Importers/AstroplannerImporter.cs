@@ -2,7 +2,7 @@
 // 
 // Copyright © 2015 Tigra Networks., all rights reserved.
 // 
-// File: AstroplannerImporter.cs  Last modified: 2015-03-07@17:20 by Tim Long
+// File: AstroplannerImporter.cs  Last modified: 2015-03-08@01:43 by Tim Long
 
 using System.IO;
 
@@ -15,6 +15,11 @@ namespace TA.Horizon.Importers
         public AstroplannerImporter(Stream source)
             {
             this.source = source;
+            }
+
+        public string SourceName
+            {
+            get { return "Astroplanner"; }
             }
 
         public HorizonData ImportHorizon()

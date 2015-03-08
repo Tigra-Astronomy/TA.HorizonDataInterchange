@@ -141,12 +141,16 @@
     <Compile Include="Importers\IHorizonImporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistryWriters\AcpRegistryWriter.cs" />
     <Compile Include="RegistryWriters\FakeRegistryWriter.cs" />
     <Compile Include="RegistryWriters\IRegistryWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="SampleData\AstroPlanner.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

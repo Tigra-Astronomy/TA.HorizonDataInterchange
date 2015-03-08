@@ -10,9 +10,9 @@ namespace TA.Horizon.RegistryWriters
         {
         IDictionary<string,string> registryKeys = new Dictionary<string, string>();
         public IDictionary<string,string> RegistryKeys { get {return registryKeys;} }
-        public void SetKey<T>(string keyname, T value)
+        public void SetKey<T>(string name, T value)
             {
-            registryKeys[keyname] = value.ToString();
+            registryKeys[name] = value.ToString();
             }
         }
     }

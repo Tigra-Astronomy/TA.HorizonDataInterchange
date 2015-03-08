@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,11 @@ namespace TA.Horizon.Exporters
             this.writer = writer;
             }
 
+        public string Name
+            {
+            get { return "ACP"; }
+            }
+
         public void ExportHorizon(HorizonData data)
             {
             var builder = new StringBuilder();
@@ -25,8 +31,7 @@ namespace TA.Horizon.Exporters
                 builder.AppendFormat("{0:F1} ", altitude);
                 }
             builder.Length--;   // Removes the trailing space
-            var registryValue = builder.ToString();
-            writer.SetKey("Horizon", registryValue);
+            writer.SetKey("Horizon", builder);
             }
         }
     }
