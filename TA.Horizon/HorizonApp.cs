@@ -5,6 +5,7 @@
 // File: HorizonApp.cs  Last modified: 2015-03-07@04:33 by Tim Long
 
 using System;
+using System.Diagnostics.Contracts;
 using System.IO;
 using CommandLine;
 using TA.Horizon.Exporters;
@@ -33,6 +34,7 @@ namespace TA.Horizon
 
         IHorizonImporter GetImporter()
             {
+            Contract.Requires(!string.IsNullOrEmpty(options.Value.SourceFile));
             var sourceStream = new FileStream(options.Value.SourceFile, FileMode.Open, FileAccess.Read, FileShare.Read);
             var importer = new AstroplannerImporter(sourceStream);
             return importer;

@@ -4,6 +4,8 @@
 // 
 // File: AstroplannerImporter.cs  Last modified: 2015-03-08@01:43 by Tim Long
 
+using System;
+using System.Diagnostics.Contracts;
 using System.IO;
 
 namespace TA.Horizon.Importers
@@ -12,8 +14,15 @@ namespace TA.Horizon.Importers
         {
         readonly Stream source;
 
+        [ContractInvariantMethod]
+        void ObjectInvariant()
+            {
+            Contract.Invariant(this.source!=null);
+            }
+
         public AstroplannerImporter(Stream source)
             {
+            Contract.Requires(source!=null);
             this.source = source;
             }
 
@@ -32,6 +41,8 @@ namespace TA.Horizon.Importers
                     {
                     var sourceLine = reader.ReadLine();
                     var parts = sourceLine.Split(',');
+                    if (parts.Length != 3) 
+                        throw new FormatException("Unable to parse input file (missing fields)");
                     var azimuth = int.Parse(parts[0]);
                     var horizon = double.Parse(parts[1]);
                     var lightDome = double.Parse(parts[2]);
