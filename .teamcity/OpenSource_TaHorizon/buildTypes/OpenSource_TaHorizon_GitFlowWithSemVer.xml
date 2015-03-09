@@ -4,7 +4,7 @@
   <settings>
     <options>
       <option name="allowExternalStatus" value="true" />
-      <option name="artifactRules" value="TA.Horizon\TA.Horizon\bin\**" />
+      <option name="artifactRules" value="TA.Horizon\bin\**" />
       <option name="buildNumberPattern" value="%MajorVersion%.%MinorVersion%.%PatchVersion%-%env.TEAMCITY_BUILDCONF_NAME%.%sharedBuildNumber.id17%%" />
     </options>
     <parameters>
