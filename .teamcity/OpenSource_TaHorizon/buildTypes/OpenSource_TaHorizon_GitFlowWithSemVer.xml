@@ -4,13 +4,13 @@
   <settings>
     <options>
       <option name="allowExternalStatus" value="true" />
-      <option name="artifactRules" value="C:\Users\Tim\VS-Projects\TA.Horizon\TA.Horizon\bin\**" />
+      <option name="artifactRules" value="TA.Horizon\TA.Horizon\bin\**" />
       <option name="buildNumberPattern" value="%MajorVersion%.%MinorVersion%.%PatchVersion%-%env.TEAMCITY_BUILDCONF_NAME%.%sharedBuildNumber.id17%%" />
     </options>
     <parameters>
       <param name="MajorVersion" value="0" />
       <param name="MinorVersion" value="0" />
-      <param name="PatchVersion" value="0" />
+      <param name="PatchVersion" value="1" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_129" name="Install NuGet packages for solution" type="jb.nuget.installer">
