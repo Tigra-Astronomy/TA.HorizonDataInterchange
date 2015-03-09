@@ -27,6 +27,6 @@ namespace TA.Horizon.Specifications
         Because of = () => Imported = Importer.ImportHorizon();
         It should_read_64_data_points = () => Imported.Count.ShouldEqual(72);
         // The maximum solid horizon value is 16; maximum light dome value is 38.
-        It should_not_use_the_light_dome_data = () =>  Imported.Max(p=>p.Value).ShouldBeLessThanOrEqualTo(16.0);
+        It should_not_use_the_light_dome_data = () =>  Imported.Max(p=>p.Value.HorizonAltitude).ShouldBeLessThanOrEqualTo(16.0);
         }
     }
