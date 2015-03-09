@@ -2,8 +2,10 @@
 // 
 // Copyright © 2015 Tigra Networks., all rights reserved.
 // 
-// File: AcpRegistryWriter.cs  Last modified: 2015-03-08@01:53 by Tim Long
+// File: AcpRegistryWriter.cs  Last modified: 2015-03-09@04:02 by Tim Long
 
+using System;
+using System.Diagnostics.Contracts;
 using Microsoft.Win32;
 
 namespace TA.Horizon.RegistryWriters

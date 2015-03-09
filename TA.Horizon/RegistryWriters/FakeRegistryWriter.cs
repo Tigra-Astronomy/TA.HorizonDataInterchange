@@ -8,7 +8,7 @@ namespace TA.Horizon.RegistryWriters
     {
     class FakeRegistryWriter : IRegistryWriter
         {
-        IDictionary<string,string> registryKeys = new Dictionary<string, string>();
+        readonly IDictionary<string,string> registryKeys = new Dictionary<string, string>();
         public IDictionary<string,string> RegistryKeys { get {return registryKeys;} }
         public void SetKey<T>(string name, T value)
             {

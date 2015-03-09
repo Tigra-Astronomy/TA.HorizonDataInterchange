@@ -134,6 +134,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Exporters\AcpExporter.cs" />
     <Compile Include="Exporters\IHorizonExporter.cs" />
     <Compile Include="HorizonAppOptions.cs" />
