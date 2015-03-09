@@ -14,9 +14,17 @@ This project is covered by the [MIT License](http://opensource.org/licenses/MIT 
 * Current version is: 0.0 pre-release; API not frozen, expect breaking changes, anything goes.
 
 ### Usage Example ###
-    horizon.exe -source Astroplanner -SourceFile ExportedHorizon.csv -destination ACP
 
-    horizon.exe -source ACP -destination CsvFile -DestinationFile c:\exported.csv
+The initial release has some options hard coded so that it imports from Astroplanner and exports to ACP. Only the source file needs to be specified, like so:
+
+
+    horizon.exe --sourcefile data-exported-from-astroplanner.csv
+    horizon.exe -s data-exported-from-astroplanner.csv
+
+In future versions there will need to be much more flexibility on the command line. Some examples of the envisioned syntax:
+
+    horizon.exe --from Astroplanner -SourceFile ExportedHorizon.csv --to ACP
+    horizon.exe --from ACP --to CsvFile --DestinationFile c:\exported.csv
 
 
 ### How do I get set up? ###
