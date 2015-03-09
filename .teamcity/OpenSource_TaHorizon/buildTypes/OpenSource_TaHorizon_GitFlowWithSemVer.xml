@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="6c240145-8f3d-4c70-9d1d-1eba3a6b5dc4" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>GitFlow with SemVer</name>
+  <settings>
+    <options>
+      <option name="allowExternalStatus" value="true" />
+      <option name="artifactRules" value="C:\Users\Tim\VS-Projects\TA.Horizon\TA.Horizon\bin\**" />
+      <option name="buildNumberPattern" value="%MajorVersion%.%MinorVersion%.%PatchVersion%-%env.TEAMCITY_BUILDCONF_NAME%.%sharedBuildNumber.id17%%" />
+    </options>
+    <parameters>
+      <param name="MajorVersion" value="0" />
+      <param name="MinorVersion" value="0" />
+      <param name="PatchVersion" value="0" />
+    </parameters>
+    <build-runners>
+      <runner id="RUNNER_129" name="Install NuGet packages for solution" type="jb.nuget.installer">
+        <parameters>
+          <param name="nuget.path" value="?NuGet.CommandLine.DEFAULT.nupkg" />
+          <param name="nuget.updatePackages" value="true" />
+          <param name="nuget.updatePackages.mode" value="sln" />
+          <param name="nuget.updatePackages.safe" value="true" />
+          <param name="nuget.use.restore" value="install" />
+          <param name="nugetCustomPath" value="?NuGet.CommandLine.DEFAULT.nupkg" />
+          <param name="nugetPathSelector" value="?NuGet.CommandLine.DEFAULT.nupkg" />
+          <param name="sln.path" value="TA.Horizon.sln" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_127" name="Build Solution (Debug | AnyCPU)" type="VS.Solution">
+        <parameters>
+          <param name="build-file-path" value="TA.Horizon.sln" />
+          <param name="msbuild.prop.Configuration" value="Debug" />
+          <param name="msbuild_version" value="12.0" />
+          <param name="run-platform" value="x86" />
+          <param name="targets" value="Rebuild" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="toolsVersion" value="12.0" />
+          <param name="vs.version" value="vs2013" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_128" name="Unit test and code coverage" type="jetbrains.mspec">
+        <parameters>
+          <param name="dotNetCoverage.NCover.HTMLReport.File.Sort" value="0" />
+          <param name="dotNetCoverage.NCover.HTMLReport.File.Type" value="1" />
+          <param name="dotNetCoverage.NCover.Reg" value="selected" />
+          <param name="dotNetCoverage.NCover.platformBitness" value="x86" />
+          <param name="dotNetCoverage.NCover.platformVersion" value="v2.0" />
+          <param name="dotNetCoverage.NCover3.Reg" value="selected" />
+          <param name="dotNetCoverage.NCover3.args" value="//ias .*" />
+          <param name="dotNetCoverage.NCover3.platformBitness" value="x86" />
+          <param name="dotNetCoverage.NCover3.platformVersion" value="v2.0" />
+          <param name="dotNetCoverage.NCover3.reporter.executable.args" value="//or FullCoverageReport:Html:{teamcity.report.path}" />
+          <param name="dotNetCoverage.PartCover.Reg" value="selected" />
+          <param name="dotNetCoverage.PartCover.includes" value="[*]*" />
+          <param name="dotNetCoverage.PartCover.platformBitness" value="x86" />
+          <param name="dotNetCoverage.PartCover.platformVersion" value="v2.0" />
+          <param name="dotNetCoverage.dotCover.attributeFilters" value="-:Subject" />
+          <param name="dotNetCoverage.dotCover.filters" value="-:*.Specifications.dll" />
+          <param name="dotNetCoverage.tool" value="dotcover" />
+          <param name="dotNetTestRunner.Type" value="MSpec" />
+          <param name="mspec_bit" value="MSIL" />
+          <param name="mspec_files_include" value="*.Specifications\bin\Debug\*.Specifications.dll" />
+          <param name="mspec_path" value="packages\Machine.Specifications.Runner.Console.0.9.0\tools\mspec-clr4.exe" />
+          <param name="mspec_runtime_version" value="v4.0" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_60" name="Build Solution (Release | AnyCPU)" type="VS.Solution">
+        <parameters>
+          <param name="build-file-path" value="TA.Horizon.sln" />
+          <param name="msbuild.prop.Configuration" value="Release" />
+          <param name="msbuild_version" value="12.0" />
+          <param name="run-platform" value="x86" />
+          <param name="targets" value="Rebuild" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="toolsVersion" value="12.0" />
+          <param name="vs.version" value="vs2013" />
+        </parameters>
+      </runner>
+    </build-runners>
+    <vcs-settings>
+      <vcs-entry-ref root-id="OpenSource_TaHorizon_HttpsBitbucketOrgTigraAstronomyHorizonDataInterchangeGit" />
+    </vcs-settings>
+    <requirements>
+      <exists name="env.DotNetMicroFramework43" />
+    </requirements>
+    <build-triggers>
+      <build-trigger id="vcsTrigger" type="vcsTrigger">
+        <parameters>
+          <param name="branchFilter" value="+:*" />
+          <param name="quietPeriodMode" value="DO_NOT_USE" />
+        </parameters>
+      </build-trigger>
+    </build-triggers>
+    <build-extensions>
+      <extension id="JetBrains.AssemblyInfo" type="JetBrains.AssemblyInfo">
+        <parameters>
+          <param name="assembly-format" value="%MajorVersion%.%MinorVersion%.%PatchVersion%.%sharedBuildNumber.id17%" />
+          <param name="file-format" value="%MajorVersion%.%MinorVersion%.%PatchVersion%.%sharedBuildNumber.id17%" />
+          <param name="info-format" value="%system.build.number% built by TeamCity" />
+          <param name="patch-global-assembly-info" value="true" />
+        </parameters>
+      </extension>
+      <extension id="jetbrains.agent.free.space" type="jetbrains.agent.free.space">
+        <parameters>
+          <param name="free-space-work" value="10gb" />
+        </parameters>
+      </extension>
+      <extension id="perfmon" type="perfmon">
+        <parameters />
+      </extension>
+      <extension id="BUILD_EXT_33" type="VcsLabeling">
+        <parameters>
+          <param name="labelingPattern" value="build-%system.build.number%" />
+          <param name="successfulOnly" value="true" />
+          <param name="vcsRootId" value="OpenSource_TaHorizon_HttpsBitbucketOrgTigraAstronomyHorizonDataInterchangeGit" />
+        </parameters>
+      </extension>
+    </build-extensions>
+    <cleanup />
+  </settings>
+</template>
+

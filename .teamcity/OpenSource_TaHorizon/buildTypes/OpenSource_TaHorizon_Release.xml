@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e4f12279-64d4-49b9-a526-6517a312dd23" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Release</name>
+  <description>Release builds from the master branch</description>
+  <settings ref="OpenSource_TaHorizon_GitFlowWithSemVer">
+    <parameters>
+      <param name="BranchSpecification" value="+:refs/heads/(master)" />
+    </parameters>
+    <build-runners order="RUNNER_129, RUNNER_127, RUNNER_128, RUNNER_60" />
+    <vcs-settings />
+    <requirements />
+    <build-triggers />
+    <cleanup />
+  </settings>
+</build-type>
+
