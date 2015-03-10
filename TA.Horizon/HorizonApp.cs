@@ -5,6 +5,7 @@
 // File: HorizonApp.cs  Last modified: 2015-03-07@04:33 by Tim Long
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
 using CommandLine;
@@ -17,6 +18,8 @@ namespace TA.Horizon
     public class HorizonApp
         {
         readonly ParserResult<HorizonAppOptions> options;
+        readonly IDictionary<string, Type> importers = DynamicDiscovery.DiscoverImporters();
+        readonly IDictionary<string, Type> exporters = DynamicDiscovery.DiscoverExporters();
 
         public HorizonApp(ParserResult<HorizonAppOptions> options)
             {
