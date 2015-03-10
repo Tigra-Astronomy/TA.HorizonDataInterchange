@@ -145,6 +145,7 @@
     <Compile Include="HorizonData.cs" />
     <Compile Include="HorizonDatum.cs" />
     <Compile Include="Importers\AstroplannerImporter.cs" />
+    <Compile Include="Importers\AstroplannerOptions.cs" />
     <Compile Include="Importers\IHorizonImporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

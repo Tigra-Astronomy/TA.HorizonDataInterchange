@@ -33,5 +33,10 @@ namespace TA.Horizon.Exporters
             builder.Length--;   // Removes the trailing space
             writer.SetKey("Horizon", builder);
             }
+
+        public void ProcessCommandLineArguments(string[] args)
+            {
+            throw new NotImplementedException();
+            }
         }
     }
