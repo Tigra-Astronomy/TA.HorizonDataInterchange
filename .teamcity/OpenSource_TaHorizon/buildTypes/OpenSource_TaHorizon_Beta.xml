@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f43d53df-ab6a-4462-b929-39b9d9de3d1d" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>Beta</name>
+  <description>Beta (release hardening) builds</description>
+  <settings ref="OpenSource_TaHorizon_GitFlowWithSemVer">
+    <parameters>
+      <param name="BranchSpecification" value="+:refs/heads/(release/*)" />
+    </parameters>
+    <build-runners order="RUNNER_129, RUNNER_127, RUNNER_128, RUNNER_60" />
+    <vcs-settings />
+    <requirements />
+    <build-triggers />
+    <cleanup />
+  </settings>
+</build-type>
+

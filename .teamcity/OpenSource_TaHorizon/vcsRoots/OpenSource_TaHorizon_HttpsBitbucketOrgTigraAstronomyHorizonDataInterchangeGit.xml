@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vcs-root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="4d129ee1-386e-4920-9f99-537092e23805" type="jetbrains.git" xsi:noNamespaceSchemaLocation="http://www.jetbrains.com/teamcity/schemas/9.0/project-config.xsd">
+  <name>https://bitbucket.org/tigra-astronomy/horizon-data-interchange.git</name>
+  <param name="agentCleanFilesPolicy" value="ALL_UNTRACKED" />
+  <param name="agentCleanPolicy" value="ON_BRANCH_CHANGE" />
+  <param name="authMethod" value="PASSWORD" />
+  <param name="branch" value="develop" />
+  <param name="ignoreKnownHosts" value="true" />
+  <param name="secure:password" value="zxxbd9862929814ed96b45f46eaac1bc2a0" />
+  <param name="submoduleCheckout" value="CHECKOUT" />
+  <param name="teamcity:branchSpec" value="%BranchSpecification%" />
+  <param name="url" value="https://bitbucket.org/tigra-astronomy/horizon-data-interchange.git" />
+  <param name="useAlternates" value="true" />
+  <param name="username" value="tigranetworks" />
+  <param name="usernameStyle" value="USERID" />
+</vcs-root>
+

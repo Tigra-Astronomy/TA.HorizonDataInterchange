@@ -2,49 +2,91 @@
 // 
 // Copyright © 2015 Tigra Networks., all rights reserved.
 // 
-// File: HorizonApp.cs  Last modified: 2015-03-07@04:33 by Tim Long
+// File: HorizonApp.cs  Last modified: 2015-03-10@23:35 by Tim Long
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.IO;
+using System.Linq;
 using CommandLine;
 using TA.Horizon.Exporters;
 using TA.Horizon.Importers;
-using TA.Horizon.RegistryWriters;
 
 namespace TA.Horizon
     {
     public class HorizonApp
         {
-        readonly ParserResult<HorizonAppOptions> options;
+        const int ErrorCodeInvalidImporterOrExporter = -2;
+        readonly string[] commandLineArguments;
+        readonly IDictionary<string, Type> exporters = DynamicDiscovery.DiscoverExporters();
+        readonly IDictionary<string, Type> importers = DynamicDiscovery.DiscoverImporters();
+        ParserResult<HorizonAppOptions> options;
 
-        public HorizonApp(ParserResult<HorizonAppOptions> options)
+        public HorizonApp(string[] args)
             {
-            this.options = options;
+            commandLineArguments = args;
             }
 
         public void Run()
             {
-            //HACK - hard code importers and exporters; later, get them from command line options.
+            /*
+             * Here we take a first pass over the command line options and fail
+             * early if there are any missing required arguments. These options determine
+             * which Importer and Exporter to load. Once loaded, the Importer and Exporter
+             * receive copies of the command line arguments and may perform further processing.
+             * Extra arguments are allowed at this stage but may be rejected later by the
+             * Importer or the Exporter.
+             */
+            var caseInsensitiveParser = new Parser(with =>
+                {
+                with.CaseSensitive = false;
+                with.IgnoreUnknownArguments = true;
+                with.HelpWriter = Console.Error;
+                });
+            options = caseInsensitiveParser.ParseArguments<HorizonAppOptions>(commandLineArguments);
+            if (options.Errors.Any())
+                {
+                Environment.Exit(-1);
+                }
+
+            // Load the specified importer and ask it to parse its command line arguments.
             IHorizonImporter importer = GetImporter();
+            importer.ProcessCommandLineArguments(commandLineArguments);
+
+            // Load the specified exporter and ask it to parse its command line arguments.
             IHorizonExporter exporter = GetExporter();
+            exporter.ProcessCommandLineArguments(commandLineArguments);
+
+            // Perform the import and the export.
             var horizon = importer.ImportHorizon();
             exporter.ExportHorizon(horizon);
             }
 
+        TInstance GetInstanceOfDynamicallyDiscoveredType<TInstance>(string typeName,
+            IDictionary<string, Type> allowedTypes) where TInstance : class
+            {
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(typeName));
+            Contract.Requires<ArgumentNullException>(allowedTypes != null);
+            Contract.Requires<ArgumentException>(allowedTypes.ContainsKey(typeName));
+            var type = allowedTypes[typeName];
+            var typeInstance = (TInstance) Activator.CreateInstance(type);
+            return typeInstance;
+            }
+
         IHorizonImporter GetImporter()
             {
-            Contract.Requires(!string.IsNullOrEmpty(options.Value.SourceFile));
-            var sourceStream = new FileStream(options.Value.SourceFile, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var importer = new AstroplannerImporter(sourceStream);
-            return importer;
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(options.Value.Importer),
+                "No importer was specified");
+            var importerName = options.Value.Importer + "Importer";
+            return GetInstanceOfDynamicallyDiscoveredType<IHorizonImporter>(importerName, importers);
             }
 
         IHorizonExporter GetExporter()
             {
-            var registryWriter = new AcpRegistryWriter();
-            var exporter = new AcpExporter(registryWriter);
-            return exporter;
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(options.Value.Exporter),
+                "No exporter was specified.");
+            var exporterName = options.Value.Exporter + "Exporter";
+            return GetInstanceOfDynamicallyDiscoveredType<IHorizonExporter>(exporterName, exporters);
             }
         }
     }

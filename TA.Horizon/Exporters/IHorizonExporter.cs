@@ -8,7 +8,7 @@ namespace TA.Horizon.Exporters
     {
     public interface IHorizonExporter
         {
-        string Name { get; }
         void ExportHorizon(HorizonData data);
+        void ProcessCommandLineArguments(string[] args);
         }
     }

@@ -2,9 +2,10 @@
 // 
 // Copyright © 2015 Tigra Networks., all rights reserved.
 // 
-// File: Program.cs  Last modified: 2015-03-07@00:37 by Tim Long
+// File: Program.cs  Last modified: 2015-03-10@17:59 by Tim Long
 
 using System;
+using System.Linq;
 using CommandLine;
 
 namespace TA.Horizon
@@ -13,11 +14,16 @@ namespace TA.Horizon
         {
         static void Main(string[] args)
             {
-            var parser = new Parser();
-            var options = parser.ParseArguments<HorizonAppOptions>(args);
-            var app = new HorizonApp(options);
-            app.Run();
-            Console.ReadLine();
+            try
+                {
+                var app = new HorizonApp(args);
+                app.Run();
+                }
+            catch (Exception ex)
+                {
+                Console.WriteLine("Application error: {0}", ex.Message);
+                Environment.Exit(-1);
+                }
             }
         }
     }
