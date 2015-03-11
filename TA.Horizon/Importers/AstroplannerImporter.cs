@@ -7,32 +7,34 @@
 using System;
 using System.Diagnostics.Contracts;
 using System.IO;
+using System.Linq;
+using CommandLine;
 
 namespace TA.Horizon.Importers
     {
     internal class AstroplannerImporter : IHorizonImporter
         {
-        readonly Stream source;
+        Stream source;
+        string[] commandLineArguments;
+        ParserResult<AstroplannerOptions> options;
 
-        [ContractInvariantMethod]
-        void ObjectInvariant()
-            {
-            Contract.Invariant(this.source!=null);
-            }
+        public AstroplannerImporter(){}
 
-        public AstroplannerImporter(Stream source)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AstroplannerImporter"/> class and directly sets the source stream.
+        /// This constructor is only available internally and is intended for unit testing.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        internal AstroplannerImporter(Stream source)
             {
-            Contract.Requires(source!=null);
             this.source = source;
-            }
-
-        public string SourceName
-            {
-            get { return "Astroplanner"; }
             }
 
         public HorizonData ImportHorizon()
             {
+            //Contract.Requires<InvalidOperationException>(source!=null, "The source file was not available");
+            //Contract.Requires<InvalidOperationException>(options != null, "Command line options were not successfully parsed");
+            //Contract.Requires<InvalidOperationException>(!options.Errors.Any(),"There were command line errors.");
             var horizonData = new HorizonData();
             using (var reader = new StreamReader(source))
                 {
@@ -50,6 +52,24 @@ namespace TA.Horizon.Importers
                     }
                 }
             return horizonData;
+            }
+
+        public void ProcessCommandLineArguments(string[] args)
+            {
+            this.commandLineArguments = args;
+            var caseInsensitiveParser = new Parser(with =>
+            {
+                with.CaseSensitive = false;
+                with.IgnoreUnknownArguments = true;
+                with.HelpWriter = Console.Error;
+            });
+            options = caseInsensitiveParser.ParseArguments<AstroplannerOptions>(args);
+            if (options.Errors.Any())
+                {
+                Environment.Exit(-1);
+                }
+
+            source = new FileStream(options.Value.SourceFile, FileMode.Open, FileAccess.Read, FileShare.Read);
             }
         }
     }

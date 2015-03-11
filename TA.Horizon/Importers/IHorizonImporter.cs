@@ -8,7 +8,7 @@ namespace TA.Horizon.Importers
     {
     public interface IHorizonImporter
         {
-        string SourceName { get; }
         HorizonData ImportHorizon();
+        void ProcessCommandLineArguments(string[] args);
         }
     }

@@ -12,14 +12,13 @@ namespace TA.Horizon.Exporters
         {
         readonly IRegistryWriter writer;
 
-        public AcpExporter(IRegistryWriter writer)
+        public AcpExporter()
+            {
+            this.writer = new AcpRegistryWriter();
+            }
+        internal AcpExporter(IRegistryWriter writer)
             {
             this.writer = writer;
-            }
-
-        public string Name
-            {
-            get { return "ACP"; }
             }
 
         public void ExportHorizon(HorizonData data)
@@ -32,6 +31,11 @@ namespace TA.Horizon.Exporters
                 }
             builder.Length--;   // Removes the trailing space
             writer.SetKey("Horizon", builder);
+            }
+
+        public void ProcessCommandLineArguments(string[] args)
+            {
+            // ACP exporter has no command line options.
             }
         }
     }
