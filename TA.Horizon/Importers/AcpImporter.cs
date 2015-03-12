@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using TA.Horizon.RegistryWriters;
 
 namespace TA.Horizon.Importers
@@ -11,7 +12,12 @@ namespace TA.Horizon.Importers
         {
         readonly IRegistryReader reader;
 
-        public AcpImporter(IRegistryReader reader)
+        [UsedImplicitly]
+        public AcpImporter()
+            {
+            reader = new AcpRegistryReaderWriter();
+            }
+        internal AcpImporter(IRegistryReader reader)
             {
             this.reader = reader;
             }
