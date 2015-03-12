@@ -144,12 +144,14 @@
     <Compile Include="HorizonApp.cs" />
     <Compile Include="HorizonData.cs" />
     <Compile Include="HorizonDatum.cs" />
+    <Compile Include="Importers\AcpImporter.cs" />
     <Compile Include="Importers\AstroplannerImporter.cs" />
     <Compile Include="Importers\AstroplannerOptions.cs" />
     <Compile Include="Importers\IHorizonImporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryWriters\AcpRegistryWriter.cs" />
+    <Compile Include="RegistryWriters\FakeRegistryReader.cs" />
     <Compile Include="RegistryWriters\FakeRegistryWriter.cs" />
     <Compile Include="RegistryWriters\IRegistryWriter.cs" />
   </ItemGroup>

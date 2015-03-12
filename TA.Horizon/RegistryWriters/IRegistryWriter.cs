@@ -9,6 +9,11 @@ namespace TA.Horizon.RegistryWriters
         void SetKey<T>(string name, T value);
         }
 
+    internal interface IRegistryReader
+        {
+        T GetValue<T>(string name);
+        }
+
     [ContractClassFor(typeof(IRegistryWriter))]
     internal abstract class IRegistryWriterContracts : IRegistryWriter
         {
