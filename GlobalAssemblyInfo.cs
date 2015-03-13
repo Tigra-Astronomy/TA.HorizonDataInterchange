@@ -23,3 +23,4 @@ using System.Runtime.InteropServices;
 
 
 [assembly: InternalsVisibleTo("TA.Horizon.Specifications")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

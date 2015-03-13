@@ -6,7 +6,7 @@
 
 namespace TA.Horizon.Importers
     {
-    public interface IHorizonImporter
+    internal interface IHorizonImporter
         {
         HorizonData ImportHorizon();
         void ProcessCommandLineArguments(string[] args);
