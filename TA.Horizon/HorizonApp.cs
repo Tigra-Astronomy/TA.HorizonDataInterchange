@@ -62,13 +62,22 @@ namespace TA.Horizon
             exporter.ExportHorizon(horizon);
             }
 
-        TInstance GetInstanceOfDynamicallyDiscoveredType<TInstance>(string typeName,
+        internal static TInstance GetInstanceOfDynamicallyDiscoveredType<TInstance>(string typeName,
             IDictionary<string, Type> allowedTypes) where TInstance : class
             {
             Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(typeName));
             Contract.Requires<ArgumentNullException>(allowedTypes != null);
-            Contract.Requires<ArgumentException>(allowedTypes.ContainsKey(typeName));
-            var type = allowedTypes[typeName];
+            var caseInsensitiveQuery = from allowedType in allowedTypes
+                                       where allowedType.Key.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)
+                                       select allowedType;
+            if (!caseInsensitiveQuery.Any())
+                {
+                var exception = new ArgumentException("The requested type is not one of the allowed types");
+                exception.Data["Allowed Types"] = allowedTypes.Keys;
+                throw exception;
+                }
+            var type = caseInsensitiveQuery.Single().Value;
+            //var type = allowedTypes[typeName];
             var typeInstance = (TInstance) Activator.CreateInstance(type);
             return typeInstance;
             }
