@@ -139,6 +139,7 @@
     </Compile>
     <Compile Include="DynamicDiscovery.cs" />
     <Compile Include="Exporters\AcpExporter.cs" />
+    <Compile Include="Exporters\ConsoleExporter.cs" />
     <Compile Include="Exporters\IHorizonExporter.cs" />
     <Compile Include="HorizonAppOptions.cs" />
     <Compile Include="HorizonApp.cs" />
