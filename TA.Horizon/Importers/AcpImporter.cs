@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommandLine;
 using JetBrains.Annotations;
 using TA.Horizon.RegistryWriters;
 
@@ -37,7 +38,7 @@ namespace TA.Horizon.Importers
             return results;
             }
 
-        public void ProcessCommandLineArguments(string[] args)
+        public void ProcessCommandLineArguments(Parser parser, string[] args)
             {
             }
         }

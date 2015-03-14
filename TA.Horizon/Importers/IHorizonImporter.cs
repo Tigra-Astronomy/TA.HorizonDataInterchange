@@ -4,11 +4,13 @@
 // 
 // File: IHorizonImporter.cs  Last modified: 2015-03-08@01:43 by Tim Long
 
+using CommandLine;
+
 namespace TA.Horizon.Importers
     {
     internal interface IHorizonImporter
         {
         HorizonData ImportHorizon();
-        void ProcessCommandLineArguments(string[] args);
+        void ProcessCommandLineArguments(Parser parser, string[] args);
         }
     }

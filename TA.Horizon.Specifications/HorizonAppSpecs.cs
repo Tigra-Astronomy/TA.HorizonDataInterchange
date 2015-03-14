@@ -19,7 +19,7 @@ namespace TA.Horizon.Specifications
         Establish context = () =>
             {
             AllowedTypes = new Dictionary<string, Type>();
-            AllowedTypes["AstroPlannerImporter"] = typeof (AstroplannerImporter);
+            AllowedTypes["AstroPlannerImporter"] = typeof (AstroPlannerImporter);
             };
         Because of =
             () =>
@@ -27,7 +27,7 @@ namespace TA.Horizon.Specifications
                     HorizonApp.GetInstanceOfDynamicallyDiscoveredType<IHorizonImporter>("astroplannerimPORTER",
                         AllowedTypes);
         It should_use_invariant_culture_case_insensitive_lookup =
-            () => Importer.ShouldBeOfExactType<AstroplannerImporter>();
+            () => Importer.ShouldBeOfExactType<AstroPlannerImporter>();
         }
 
     [Subject(typeof (HorizonApp), "invalid importer")]
