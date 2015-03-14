@@ -6,7 +6,6 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using CommandLine;
 using Machine.Specifications;
 using TA.Horizon.Exporters;
@@ -35,31 +34,5 @@ namespace TA.Horizon.Specifications
         Because of = () => Exporter.ProcessCommandLineArguments(Parser, CommandLineArgs);
         It should_exit_and_display_help = () => HelpWriter.ToString().ShouldNotBeEmpty();
         It should_set_the_exit_code_to_an_error = () => Environment.ExitCode.ShouldBeLessThan(0);
-        }
-
-    internal class AstroPlannerExporter : IHorizonExporter
-        {
-        ParserResult<AstroPlannerExporterOptions> options;
-
-        public void ExportHorizon(HorizonData data)
-            {
-            throw new NotImplementedException();
-            }
-
-        public void ProcessCommandLineArguments(Parser parser, string[] args)
-            {
-            options = parser.ParseArguments<AstroPlannerExporterOptions>(args);
-            if (options.Errors.Any())
-                {
-                Environment.ExitCode = -1;
-                }
-            }
-        }
-
-    internal class AstroPlannerExporterOptions
-        {
-        [Option('d', "DestinationFile", Required = true,
-            HelpText = "The destination file, into which the exported data is written in CSV format.")]
-        public string DestinationFile { get; set; }
         }
     }
