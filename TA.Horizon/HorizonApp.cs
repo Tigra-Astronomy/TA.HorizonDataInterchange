@@ -51,11 +51,11 @@ namespace TA.Horizon
 
             // Load the specified importer and ask it to parse its command line arguments.
             IHorizonImporter importer = GetImporter();
-            importer.ProcessCommandLineArguments(commandLineArguments);
+            importer.ProcessCommandLineArguments(caseInsensitiveParser, commandLineArguments);
 
             // Load the specified exporter and ask it to parse its command line arguments.
             IHorizonExporter exporter = GetExporter();
-            exporter.ProcessCommandLineArguments(commandLineArguments);
+            exporter.ProcessCommandLineArguments(caseInsensitiveParser, commandLineArguments);
 
             // Perform the import and the export.
             var horizon = importer.ImportHorizon();

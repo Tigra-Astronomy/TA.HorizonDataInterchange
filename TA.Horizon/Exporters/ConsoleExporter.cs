@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommandLine;
 
 namespace TA.Horizon.Exporters
     {
@@ -19,7 +20,7 @@ namespace TA.Horizon.Exporters
                 }
             }
 
-        public void ProcessCommandLineArguments(string[] args)
+        public void ProcessCommandLineArguments(Parser parser, string[] args)
             {
             // There are currently no command line arguments for the console exporter
             }

@@ -7,9 +7,11 @@
 using System;
 using System.Linq;
 using CommandLine;
+using JetBrains.Annotations;
 
 namespace TA.Horizon
     {
+    [UsedImplicitly]
     internal class Program
         {
         static void Main(string[] args)
@@ -19,10 +21,11 @@ namespace TA.Horizon
                 var app = new HorizonApp(args);
                 app.Run();
                 }
-            catch (Exception ex)
+            catch (Exception ex)    // Global exception handler
                 {
                 Console.WriteLine("Application error: {0}", ex.Message);
-                Environment.Exit(-1);
+                if (Environment.ExitCode >= 0)
+                    Environment.ExitCode = ex.HResult < 0? ex.HResult : -1;  // Unspecified error
                 }
             }
         }

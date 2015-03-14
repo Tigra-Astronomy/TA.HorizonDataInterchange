@@ -73,7 +73,7 @@ then an attempt will be made to load `WibblyImporter` and `WobblyExporter`. Your
 
 Importers must implement `IHorizonImporter` and exporters must implement `IHorizonExporter`. You can implement both in the same class, but two separate instances will be created at runtime so you'll need to consider the implications of that.
 
-At run time, your `ProcessCommandLineArguments()` method will be called, passing in the raw command line argument list as an array of strings exactly as it was passed to `Main()` by the operating system. It is your responsibility to parse the command line and act on any options that are relevant to your class; you should ignore any options you don't recognize. You can do this any way you are comfortable with, but keep in mind that you get *all* of the command line options, not just the ones relevant to you. We suggest handling command line parsing like this:
+At run time, your `ProcessCommandLineArguments()` method will be called, passing in the raw command line argument list as an array of strings exactly as it was passed to `Main()` by the operating system and a parser object that you can use to parse your command line options. It is your responsibility to parse the command line and act on any options that are relevant to your class; you should ignore any options you don't recognize. You can do this any way you are comfortable with, but keep in mind that you get *all* of the command line options, not just the ones relevant to you. We suggest handling command line parsing like this:
 
 Create a data transfer object (a class with nothing but properties) to hold the parsed results of your options. For example:  
 
@@ -85,19 +85,12 @@ Create a data transfer object (a class with nothing but properties) to hold the 
 
 Next, use the command line parser to parse the arguments into your options:
 
-        var caseInsensitiveParser = new Parser(with =>
-        {
-            with.CaseSensitive = false;
-            with.IgnoreUnknownArguments = true;
-            with.HelpWriter = Console.Error;
-        });
-        var options = caseInsensitiveParser.ParseArguments<MyOptions>(args);
+        var options = parser.ParseArguments<MyOptions>(args);
         if (options.Errors.Any())
             {
-            Environment.Exit(-1);	// Help is printed automatically
+            Environment.ExitCode=-1;	// Set a -ve exit code to have help printed out on the console automatically
+			throw new ArgumentException();	// Throw an appropriate exception.
             }
-
-It is important to use the `IgnoreUnknownArguments` setting as you will almost certainly encounter 'extra' options you know nothing about.
 
 Once everyone has had a chance to handle their command line options, your `ImportHorizon()` or `ExportHorizon()` method will be called.
 
