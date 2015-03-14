@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionSharedItems", "SolutionSharedItems", "{EF703B9F-F9A7-443E-8E25-497372D2FE30}"
 	ProjectSection(SolutionItems) = preProject
 		GlobalAssemblyInfo.cs = GlobalAssemblyInfo.cs
+		ReadMe.md = ReadMe.md
 	EndProjectSection
 EndProject
 Global

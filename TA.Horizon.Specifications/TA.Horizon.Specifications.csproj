@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="AcpExporterSpecs.cs" />
     <Compile Include="AcpImporterSpecs.cs" />
+    <Compile Include="AstroPlannerExporterSpecs.cs" />
     <Compile Include="HorizonAppSpecs.cs" />
     <Compile Include="HorizonDataSpecs.cs" />
     <Compile Include="AstroPlannerImporterSpecs.cs" />
