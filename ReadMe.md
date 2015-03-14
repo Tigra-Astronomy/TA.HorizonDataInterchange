@@ -73,7 +73,7 @@ then an attempt will be made to load `WibblyImporter` and `WobblyExporter`. Your
 
 Importers must implement `IHorizonImporter` and exporters must implement `IHorizonExporter`. You can implement both in the same class, but two separate instances will be created at runtime so you'll need to consider the implications of that.
 
-At run time, your `ProcessCommandLineArguments()` method will be called, passing in the raw command line argument list as an array of strings exactly as it was passed to `Main()` by the operating system. It is your responsibility to parse the command line and act on any options that are relevant to your class; you should ignore any options you don't recognize. You can do this any way you are comfortable with, but keep in mind that you get *all* of the command line options, not just the ones relevant to you. We suggest handling command line parsing like this:
+At run time, your `ProcessCommandLineArguments()` method will be called, passing in the raw command line argument list as an array of strings exactly as it was passed to `Main()` by the operating system and a parser object that you can use to parse your command line options. It is your responsibility to parse the command line and act on any options that are relevant to your class; you should ignore any options you don't recognize. You can do this any way you are comfortable with, but keep in mind that you get *all* of the command line options, not just the ones relevant to you. We suggest handling command line parsing like this:
 
 Create a data transfer object (a class with nothing but properties) to hold the parsed results of your options. For example:  
 
@@ -85,19 +85,12 @@ Create a data transfer object (a class with nothing but properties) to hold the 
 
 Next, use the command line parser to parse the arguments into your options:
 
-        var caseInsensitiveParser = new Parser(with =>
-        {
-            with.CaseSensitive = false;
-            with.IgnoreUnknownArguments = true;
-            with.HelpWriter = Console.Error;
-        });
-        var options = caseInsensitiveParser.ParseArguments<MyOptions>(args);
+        var options = parser.ParseArguments<MyOptions>(args);
         if (options.Errors.Any())
             {
-            Environment.Exit(-1);	// Help is printed automatically
+            Environment.ExitCode=-1;	// Set a -ve exit code to have help printed out on the console automatically
+			throw new ArgumentException();	// Throw an appropriate exception.
             }
-
-It is important to use the `IgnoreUnknownArguments` setting as you will almost certainly encounter 'extra' options you know nothing about.
 
 Once everyone has had a chance to handle their command line options, your `ImportHorizon()` or `ExportHorizon()` method will be called.
 
@@ -114,6 +107,8 @@ This automatic interpolation makes the import/export process rather straightforw
 
 1. To import the horizon, add each imported datum to the appropriate azimuth in your `HorizonData` collection. If your imported data has measurements every 10 degrees, then you will create entries for 0, 10, 20, 30 and so on up to 340, 350. You only need to add as many items as you obtain from the imported data set, there is no need to 'fill in the gaps'
 2. To export, simply read off whatever azimuths you need to create your exported data. If your application expects a reading every 2 degrees, then simply read off values at 2 degree increments: 0, 2, 4, 6, ... 356, 358. There is no need to check whether each value exists - you will automatically get interpolated values if there were gaps in the data.
+
+**Important**: Due to the fact that different programs and file formats use different azimuth resolutions and some applications use integer values for altitude, data is not necessarily round-trippable. Whenever data is moved from a higher resolution source to a lower resolution source, information loss occurs; when data is moved from a lower resolution source to a higher resolution source, interpolation occurs which introduces quantisation noise into the data. Therefore, it is best to pick one data source as being 'authoritative' and then only export from that source.
 
 
 

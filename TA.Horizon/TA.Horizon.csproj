@@ -139,19 +139,25 @@
     </Compile>
     <Compile Include="DynamicDiscovery.cs" />
     <Compile Include="Exporters\AcpExporter.cs" />
+    <Compile Include="Exporters\AstroPlannerExporter.cs" />
+    <Compile Include="Exporters\AstroPlannerExporterOptions.cs" />
+    <Compile Include="Exporters\ConsoleExporter.cs" />
     <Compile Include="Exporters\IHorizonExporter.cs" />
     <Compile Include="HorizonAppOptions.cs" />
     <Compile Include="HorizonApp.cs" />
     <Compile Include="HorizonData.cs" />
     <Compile Include="HorizonDatum.cs" />
+    <Compile Include="Importers\AcpImporter.cs" />
     <Compile Include="Importers\AstroplannerImporter.cs" />
     <Compile Include="Importers\AstroplannerOptions.cs" />
     <Compile Include="Importers\IHorizonImporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistryWriters\AcpRegistryWriter.cs" />
+    <Compile Include="RegistryWriters\AcpRegistryReaderWriter.cs" />
+    <Compile Include="RegistryWriters\FakeRegistryReader.cs" />
     <Compile Include="RegistryWriters\FakeRegistryWriter.cs" />
     <Compile Include="RegistryWriters\IRegistryWriter.cs" />
+    <Compile Include="ReSharperAnnotations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

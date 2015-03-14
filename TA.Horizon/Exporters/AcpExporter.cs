@@ -4,6 +4,8 @@ using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommandLine;
+using JetBrains.Annotations;
 using TA.Horizon.RegistryWriters;
 
 namespace TA.Horizon.Exporters
@@ -12,9 +14,10 @@ namespace TA.Horizon.Exporters
         {
         readonly IRegistryWriter writer;
 
+        [UsedImplicitly]
         public AcpExporter()
             {
-            this.writer = new AcpRegistryWriter();
+            this.writer = new AcpRegistryReaderWriter();
             }
         internal AcpExporter(IRegistryWriter writer)
             {
@@ -33,7 +36,7 @@ namespace TA.Horizon.Exporters
             writer.SetKey("Horizon", builder);
             }
 
-        public void ProcessCommandLineArguments(string[] args)
+        public void ProcessCommandLineArguments(Parser parser, string[] args)
             {
             // ACP exporter has no command line options.
             }

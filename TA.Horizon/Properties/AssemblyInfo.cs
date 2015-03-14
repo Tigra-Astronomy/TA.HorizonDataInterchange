@@ -5,6 +5,7 @@
 // File: AssemblyInfo.cs  Last modified: 2015-03-09@03:47 by Tim Long
 
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 

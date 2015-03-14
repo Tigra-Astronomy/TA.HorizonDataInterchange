@@ -2,7 +2,7 @@
 // 
 // Copyright © 2015 Tigra Networks., all rights reserved.
 // 
-// File: AstroplannerImporter.cs  Last modified: 2015-03-08@01:43 by Tim Long
+// File: AstroPlannerImporter.cs  Last modified: 2015-03-08@01:43 by Tim Long
 
 using System;
 using System.Diagnostics.Contracts;
@@ -12,20 +12,20 @@ using CommandLine;
 
 namespace TA.Horizon.Importers
     {
-    internal class AstroplannerImporter : IHorizonImporter
+    internal class AstroPlannerImporter : IHorizonImporter
         {
         Stream source;
         string[] commandLineArguments;
         ParserResult<AstroplannerOptions> options;
 
-        public AstroplannerImporter(){}
+        public AstroPlannerImporter(){}
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AstroplannerImporter"/> class and directly sets the source stream.
+        /// Initializes a new instance of the <see cref="AstroPlannerImporter"/> class and directly sets the source stream.
         /// This constructor is only available internally and is intended for unit testing.
         /// </summary>
         /// <param name="source">The source.</param>
-        internal AstroplannerImporter(Stream source)
+        internal AstroPlannerImporter(Stream source)
             {
             this.source = source;
             }
@@ -54,19 +54,15 @@ namespace TA.Horizon.Importers
             return horizonData;
             }
 
-        public void ProcessCommandLineArguments(string[] args)
+        public void ProcessCommandLineArguments(Parser parser, string[] args)
             {
             this.commandLineArguments = args;
-            var caseInsensitiveParser = new Parser(with =>
-            {
-                with.CaseSensitive = false;
-                with.IgnoreUnknownArguments = true;
-                with.HelpWriter = Console.Error;
-            });
-            options = caseInsensitiveParser.ParseArguments<AstroplannerOptions>(args);
+           
+            options = parser.ParseArguments<AstroplannerOptions>(args);
             if (options.Errors.Any())
                 {
-                Environment.Exit(-1);
+                Environment.ExitCode = -1;
+                throw new ArgumentException("An error occurred processing the command line options.");
                 }
 
             source = new FileStream(options.Value.SourceFile, FileMode.Open, FileAccess.Read, FileShare.Read);
