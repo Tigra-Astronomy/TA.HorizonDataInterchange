@@ -108,6 +108,8 @@ This automatic interpolation makes the import/export process rather straightforw
 1. To import the horizon, add each imported datum to the appropriate azimuth in your `HorizonData` collection. If your imported data has measurements every 10 degrees, then you will create entries for 0, 10, 20, 30 and so on up to 340, 350. You only need to add as many items as you obtain from the imported data set, there is no need to 'fill in the gaps'
 2. To export, simply read off whatever azimuths you need to create your exported data. If your application expects a reading every 2 degrees, then simply read off values at 2 degree increments: 0, 2, 4, 6, ... 356, 358. There is no need to check whether each value exists - you will automatically get interpolated values if there were gaps in the data.
 
+**Important**: Due to the fact that different programs and file formats use different azimuth resolutions and some applications use integer values for altitude, data is not necessarily round-trippable. Whenever data is moved from a higher resolution source to a lower resolution source, information loss occurs; when data is moved from a lower resolution source to a higher resolution source, interpolation occurs which introduces quantisation noise into the data. Therefore, it is best to pick one data source as being 'authoritative' and then only export from that source.
+
 
 
 *Copyright © 2015 Tigra Astronomy, all rights reserved.*
