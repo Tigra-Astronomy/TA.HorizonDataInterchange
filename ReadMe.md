@@ -47,12 +47,12 @@ Importers and Exporters may extend the command line with their own options.
 
 * Please try to write Clean Code and stick to the SOLID principles of object oriented design.
 * We use ***GitFlow*** as our branching strategy, it has worked very well for us across a number of projects. The bare minimum you must know about GitFlow to get started is:
-	* The `master` branch is reserved for releases. Commits to `master` are forbidden, except to merge a `release/*` branch.
+	* The `master` branch is reserved for releases. Commits to `master` are forbidden, except to merge a `release/*` branch which will normally be done by Tigra Astronomy.
 	* Development happens on the `develop` branch, or preferably a feature branch off develop. Feature branches are conventionally named `feature/*`.
-	* As far as possible, do one self-contained feature or bugfix per branch and then merge it back into `develop`.
+	* As far as possible, do one self-contained feature or bugfix per branch and then create a pull request to merge it back into `develop`, allowing time for code review.
 	* Find out all the gory details at [http://nvie.com/posts/a-successful-git-branching-model/](http://nvie.com/posts/a-successful-git-branching-model/ "GitFlow - a successful Git branching strategy")
 	* We are not a fan of rebasing. We prefer to push everything, so everyone can see what happened.
-* If you commit *binaries* or *build artefacts* to the ***source code*** repository, or create any folders containing the words 'copy', 'backup', 'old' or a version number, then we will hunt you down and give you the wedgie you deserve! We've seen people do all of the above and it reveals a singular lack of understanding about what a version control system does! Please think about what you commit.
+* If you commit *binaries* or *build artefacts* to the ***source code*** repository, or create any folders containing the words 'copy', 'backup', 'old' or a version number, then we will hunt you down and give you the wedgie you deserve! We've seen people do all of the above and it reveals a singular lack of understanding about what a version control system does! Please think about what you commit and only commit source code, not build artefacts nor anything that is specific to you or your computer.
 
 
 ### Who do I talk to? ###
