@@ -13,7 +13,6 @@
     <FileAlignment>512</FileAlignment>
     <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <NuGetPackageImportStamp>77336ca8</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -125,6 +124,10 @@
     <Reference Include="CommandLine">
       <HintPath>..\packages\CommandLineParser20.2.0.0.0\lib\net40\CommandLine.dll</HintPath>
     </Reference>
+    <Reference Include="JetBrains.Annotations, Version=10.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.0.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -157,10 +160,10 @@
     <Compile Include="RegistryWriters\FakeRegistryReader.cs" />
     <Compile Include="RegistryWriters\FakeRegistryWriter.cs" />
     <Compile Include="RegistryWriters\IRegistryWriter.cs" />
-    <Compile Include="ReSharperAnnotations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="HorizonData.cd" />
     <None Include="packages.config" />
     <None Include="SampleData\AstroPlanner.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -168,14 +171,6 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\CodeContracts.MSBuild.1.7.11202.1001\build\CodeContracts.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CodeContracts.MSBuild.1.7.11202.1001\build\CodeContracts.MSBuild.targets'))" />
-  </Target>
   <Import Project="..\packages\CodeContracts.MSBuild.1.7.11202.1001\build\CodeContracts.MSBuild.targets" Condition="Exists('..\packages\CodeContracts.MSBuild.1.7.11202.1001\build\CodeContracts.MSBuild.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
