@@ -142,6 +142,7 @@
     </Compile>
     <Compile Include="DynamicDiscovery.cs" />
     <Compile Include="Exporters\AcpExporter.cs" />
+    <Compile Include="Exporters\AcpExporterOptions.cs" />
     <Compile Include="Exporters\AstroPlannerExporter.cs" />
     <Compile Include="Exporters\AstroPlannerExporterOptions.cs" />
     <Compile Include="Exporters\ConsoleExporter.cs" />
