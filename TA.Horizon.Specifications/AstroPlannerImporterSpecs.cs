@@ -58,7 +58,6 @@ namespace TA.Horizon.Specifications
 
         It should_read_the_expected_light_dome_data = () =>
             {
-            var index = 0;
             var keys = Imported.Keys.ToArray();
             for (var i = 0; i < expectedLightDome.Length; i++)
                 {
