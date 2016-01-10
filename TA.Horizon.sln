@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionSharedItems", "Solu
 	ProjectSection(SolutionItems) = preProject
 		GlobalAssemblyInfo.cs = GlobalAssemblyInfo.cs
 		ReadMe.md = ReadMe.md
+		TA.Horizon.sln.DotSettings = TA.Horizon.sln.DotSettings
+		TA.Horizon.sln.GhostDoc.xml = TA.Horizon.sln.GhostDoc.xml
 	EndProjectSection
 EndProject
 Global
