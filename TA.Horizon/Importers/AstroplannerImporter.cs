@@ -32,9 +32,6 @@ namespace TA.Horizon.Importers
 
         public HorizonData ImportHorizon()
             {
-            //Contract.Requires<InvalidOperationException>(source!=null, "The source file was not available");
-            //Contract.Requires<InvalidOperationException>(options != null, "Command line options were not successfully parsed");
-            //Contract.Requires<InvalidOperationException>(!options.Errors.Any(),"There were command line errors.");
             var horizonData = new HorizonData();
             using (var reader = new StreamReader(source))
                 {

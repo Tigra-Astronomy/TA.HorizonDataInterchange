@@ -1,17 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TA.Horizon", "TA.Horizon\TA.Horizon.csproj", "{636AF52C-6984-4FC3-8C8B-AC8237447113}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TA.Horizon.Specifications", "TA.Horizon.Specifications\TA.Horizon.Specifications.csproj", "{25C84C75-AFFF-41C5-931C-E2435262B257}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DF888C23-088D-42E3-8FBC-959A41D688F5}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionSharedItems", "SolutionSharedItems", "{EF703B9F-F9A7-443E-8E25-497372D2FE30}"
 	ProjectSection(SolutionItems) = preProject
@@ -22,15 +16,20 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		DebugNoCC|Any CPU = DebugNoCC|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{636AF52C-6984-4FC3-8C8B-AC8237447113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{636AF52C-6984-4FC3-8C8B-AC8237447113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{636AF52C-6984-4FC3-8C8B-AC8237447113}.DebugNoCC|Any CPU.ActiveCfg = DebugNoCC|Any CPU
+		{636AF52C-6984-4FC3-8C8B-AC8237447113}.DebugNoCC|Any CPU.Build.0 = DebugNoCC|Any CPU
 		{636AF52C-6984-4FC3-8C8B-AC8237447113}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{636AF52C-6984-4FC3-8C8B-AC8237447113}.Release|Any CPU.Build.0 = Release|Any CPU
 		{25C84C75-AFFF-41C5-931C-E2435262B257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{25C84C75-AFFF-41C5-931C-E2435262B257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C84C75-AFFF-41C5-931C-E2435262B257}.DebugNoCC|Any CPU.ActiveCfg = DebugNoCC|Any CPU
+		{25C84C75-AFFF-41C5-931C-E2435262B257}.DebugNoCC|Any CPU.Build.0 = DebugNoCC|Any CPU
 		{25C84C75-AFFF-41C5-931C-E2435262B257}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25C84C75-AFFF-41C5-931C-E2435262B257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

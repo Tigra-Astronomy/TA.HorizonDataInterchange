@@ -19,8 +19,8 @@ namespace TA.Horizon.RegistryWriters
         {
         public void SetKey<T>(string name, T value)
             {
-            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(name));
-            Contract.Requires<ArgumentNullException>(value != null);
+            Contract.Requires(!string.IsNullOrEmpty(name));
+            Contract.Requires(value != null);
             throw new System.NotImplementedException();
             }
         }
