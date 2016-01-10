@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Text;
 using CommandLine;
 using TA.Horizon.Exporters;
 using TA.Horizon.Importers;
@@ -21,6 +22,7 @@ namespace TA.Horizon
         readonly IDictionary<string, Type> exporters = DynamicDiscovery.DiscoverExporters();
         readonly IDictionary<string, Type> importers = DynamicDiscovery.DiscoverImporters();
         ParserResult<HorizonAppOptions> options;
+        readonly List<string> errorMessages = new List<string>(); 
 
         public HorizonApp(string[] args)
             {
@@ -43,30 +45,69 @@ namespace TA.Horizon
                 with.IgnoreUnknownArguments = true;
                 with.HelpWriter = Console.Error;
                 });
-            options = caseInsensitiveParser.ParseArguments<HorizonAppOptions>(commandLineArguments);
-            if (options.Errors.Any())
+            try
                 {
-                Environment.Exit(-1);
+                options = caseInsensitiveParser.ParseArguments<HorizonAppOptions>(commandLineArguments);
+                if (options.Errors.Any()) { errorMessages.Add("Unable to process command line arguments."); }
+                }
+            catch (Exception ex)
+                {
+                errorMessages.Add(ex.Message);
                 }
 
+            IHorizonExporter exporter = null;
+            IHorizonImporter importer = null;
+
             // Load the specified importer and ask it to parse its command line arguments.
-            IHorizonImporter importer = GetImporter();
-            importer.ProcessCommandLineArguments(caseInsensitiveParser, commandLineArguments);
+            try
+                {
+                if (!string.IsNullOrWhiteSpace(options.Value.Importer))
+                    {
+                    importer = GetImporter();
+                    importer.ProcessCommandLineArguments(caseInsensitiveParser, commandLineArguments);
+                    }
+                }
+            catch (Exception ex)
+                {
+                errorMessages.Add(ex.Message);
+                }
 
             // Load the specified exporter and ask it to parse its command line arguments.
-            IHorizonExporter exporter = GetExporter();
-            exporter.ProcessCommandLineArguments(caseInsensitiveParser, commandLineArguments);
+            try
+                {
+                if (!string.IsNullOrWhiteSpace(options.Value.Exporter))
+                    {
+                    exporter = GetExporter();
+                    exporter.ProcessCommandLineArguments(caseInsensitiveParser, commandLineArguments);
+                    }
+                }
+            catch (Exception ex)
+                {
+                errorMessages.Add(ex.Message);
+                }
 
-            // Perform the import and the export.
-            var horizon = importer.ImportHorizon();
-            exporter.ExportHorizon(horizon);
+            if (importer==null || exporter==null)
+                errorMessages.Add("Both an importer and an exporter must be specified.");
+
+            if (errorMessages.Any())
+                {
+                foreach (var errorMessage in errorMessages) { Console.WriteLine(errorMessage); }
+                DisplayImportersAndExporters();
+                Environment.Exit(-1);
+                }
+            else
+                {
+                // Perform the import and the export.
+                var horizon = importer.ImportHorizon();
+                exporter.ExportHorizon(horizon);
+                }
             }
 
         internal static TInstance GetInstanceOfDynamicallyDiscoveredType<TInstance>(string typeName,
             IDictionary<string, Type> allowedTypes) where TInstance : class
             {
-            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(typeName));
-            Contract.Requires<ArgumentNullException>(allowedTypes != null);
+            Contract.Requires(!string.IsNullOrEmpty(typeName));
+            Contract.Requires(allowedTypes != null);
             var caseInsensitiveQuery = from allowedType in allowedTypes
                                        where allowedType.Key.Equals(typeName, StringComparison.InvariantCultureIgnoreCase)
                                        select allowedType;
@@ -84,7 +125,7 @@ namespace TA.Horizon
 
         IHorizonImporter GetImporter()
             {
-            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(options.Value.Importer),
+            Contract.Requires(!string.IsNullOrEmpty(options.Value.Importer),
                 "No importer was specified");
             var importerName = options.Value.Importer + "Importer";
             return GetInstanceOfDynamicallyDiscoveredType<IHorizonImporter>(importerName, importers);
@@ -92,10 +133,37 @@ namespace TA.Horizon
 
         IHorizonExporter GetExporter()
             {
-            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(options.Value.Exporter),
+            Contract.Requires(!string.IsNullOrEmpty(options.Value.Exporter),
                 "No exporter was specified.");
             var exporterName = options.Value.Exporter + "Exporter";
             return GetInstanceOfDynamicallyDiscoveredType<IHorizonExporter>(exporterName, exporters);
+            }
+
+        void DisplayImportersAndExporters()
+            {
+            Console.WriteLine("Available importers:");
+            foreach (var importer in importers.Keys) { Console.WriteLine($"\t{FriendlyName(importer)}"); }
+            Console.WriteLine("Available exporters:");
+            foreach (var exporter in exporters.Keys) { Console.WriteLine($"\t{FriendlyName(exporter)}"); }
+            }
+
+        string FriendlyName(string typeName)
+            {
+            var unqualifiedTypeName = typeName.Split('.').Last();
+            var friendlyName = RemoveSuffixes(unqualifiedTypeName, "Importer", "Exporter");
+            return friendlyName;
+            }
+
+        string RemoveSuffixes(string source, params string[] suffixes)
+            {
+            var builder = source;
+            foreach (var suffix in suffixes)
+                {
+                var position = builder.IndexOf(suffix);
+                if (position >= 0)
+                    builder = builder.Remove(position);
+                }
+            return builder;
             }
         }
     }

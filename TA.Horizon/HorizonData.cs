@@ -18,7 +18,7 @@ namespace TA.Horizon
             {
             get
                 {
-                Contract.Requires<InvalidOperationException>(Count > 0,
+                Contract.Requires(Count > 0,
                     "There must be at least one value in the horizon data before it can be queried");
                 return InterpolatedHorizonValueForAzimuth(index);
                 }

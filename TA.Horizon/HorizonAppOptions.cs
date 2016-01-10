@@ -21,7 +21,6 @@ namespace TA.Horizon
                 "Specifies the importer to be used. Other options may be required depending on the importer chosen.")]
         public string Importer { get; set; }
         [Option('e', "Exporter",
-            Required = true,
             DefaultValue = "Console",
             HelpText =
                 "Specifies the exporter to be used. Other options may be required depending on the exporter chosen.")]
