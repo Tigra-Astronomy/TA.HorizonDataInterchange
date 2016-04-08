@@ -19,6 +19,8 @@ The command line requires that the user specifies exactly one importer (`-i` or 
 
 Supplying the `--help` option (or no options) will result in a help message being displayed.
 
+10 Jan 2016 -- New feature, --UseLightDome will take the lightdome column of Astroplanner and create an ACP horizon in the ACP registry. Quit ACP before running the program. 
+
 ### Usage Example ###
 
 The initial release has only one importer, which imports from an AstroPlanner horizon file in CSV format; and an ACP exporter, which writes horizon data directly to ACP's registry. The following two commands are equivalent.
