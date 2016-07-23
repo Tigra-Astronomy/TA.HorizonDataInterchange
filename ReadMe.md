@@ -2,7 +2,7 @@
 
 **Horizon Data Interchange** is a command line utility for importing and exporting horizon data from various planetarium software and file formats.
 
-The initial version supports AstroPlanner and ACP, we hope to augment this over time.
+This version supports AstroPlanner, ObserverPro and ACP, we hope to augment this over time.
 
 Community involvement is welcome and encouraged. Please feel free to fork the repository, work on it yourself and send us pull requests. We've tried to make the code easy to extend, but if you can see a better way, have at it!
 
@@ -112,6 +112,8 @@ This automatic interpolation makes the import/export process rather straightforw
 
 **Important**: Due to the fact that different programs and file formats use different azimuth resolutions and some applications use integer values for altitude, data is not necessarily round-trippable. Whenever data is moved from a higher resolution source to a lower resolution source, information loss occurs; when data is moved from a lower resolution source to a higher resolution source, interpolation occurs which introduces quantisation noise into the data. Therefore, it is best to pick one data source as being 'authoritative' and then only export from that source.
 
+ObserverPro from http://www.observer.pro (Joshua Bury), allows an iOS device to create a Horizon file from the device camera. The file can be exported via email and has the text format "angle,deg.rees" 
+Angle ranges from 0 to 359 by 1, deg.rees are precise to 2 decimal places. ** This is non-round trippable data. **
 
 
 *Copyright © 2015 Tigra Astronomy, all rights reserved.*
