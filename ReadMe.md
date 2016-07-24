@@ -20,6 +20,7 @@ The command line requires that the user specifies exactly one importer (`-i` or 
 Supplying the `--help` option (or no options) will result in a help message being displayed.
 
 10 Jan 2016 -- New feature, --UseLightDome will take the lightdome column of Astroplanner and create an ACP horizon in the ACP registry. Quit ACP before running the program. 
+24 Jul 2016 -- New feature, --UseLightDome will also work with ObserverPro
 
 ### Usage Example ###
 
@@ -33,9 +34,10 @@ Importers and Exporters may extend the command line with their own options.
 
 ### How do I get set up? ###
 
-* You'll need Visual Studio 2010 or later, we recommend Visual Studio 2013. The Community Edition is free and now allows the use of plug-ins so we also highly recommend that you get yourself a ReSharper license.
+* You'll need Visual Studio 2010 or later, we recommend Visual Studio 2015. The Community Edition is free and now allows the use of plug-ins so we also highly recommend that you get yourself a ReSharper license.
 * The code targets .Net Framework 4.5 although we haven't used any fancy features and it should work fine with any version if you need to change it.
 * Dependencies are brought in automatically as part of the build process using NuGet.
+* If you are getting errors about "CodeContracts" missing, install (https://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970 "CodeContracts")
 * We use MSpec (Machine.Specifications) for our unit tests and FakeItEasy as our mocking framework. We are happy to accept any testing/mocking framework if you have a strong preference, as long as we can support it on our TeamCity build server and it doesn't exclude other developers (e.g. by having an expensive license fee).
 * This is a simple utility, we will use [XCOPY deployment](http://en.wikipedia.org/wiki/XCOPY_deployment "Wikipedia"). No need for an installer, just copy the compiled files and run. Because of this, everything needed to run the utility must ship with it to maintain 'XCOPY deployment'. Please don't reference anything outside the project, or users will have a hard time ensuring they have the right dependencies to use the utility. It must be possible to simply XCopy the bin directory.
 * If you are new to Git, may we suggest [Atlassian's SourceTree](http://www.sourcetreeapp.com/download/ "SourceTree download") utility? It's free, works on Windows and Mac and can use both Git and Mercurial. It has both a graphical user interface and a command prompt if you prefer that, and it has its own bundled versions of Git and Mercurial, so it is absolutely everything you need.
