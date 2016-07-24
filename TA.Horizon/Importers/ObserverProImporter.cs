@@ -44,7 +44,7 @@ namespace TA.Horizon.Importers
                         throw new FormatException("Unable to parse input file (missing fields)");
                     var azimuth = int.Parse(parts[0]);
                     var horizon = double.Parse(parts[1]);
-                    horizonData[azimuth] = new HorizonDatum(horizon, horizon);
+                    horizonData[azimuth] = new HorizonDatum(horizon, 0.0);
                     }
                 }
             return horizonData;
