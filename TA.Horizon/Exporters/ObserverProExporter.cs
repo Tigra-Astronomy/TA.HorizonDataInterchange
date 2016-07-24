@@ -16,13 +16,15 @@ namespace TA.Horizon.Exporters
                 {
                 using (var writer = new StreamWriter(stream, Encoding.UTF8))
                     {
+                    // TODO Need to fix this so that the flag for -UseLightDome is interpreted and that value is output
                     writer.WriteLine("Azimuth,Lower,Light Dome");
-                    for (int i = 0; i < 360; i += 5)
+                    for (int i = 0; i < 360; i += 1)
                         {
-                        var lower = (int) data[i].HorizonAltitude;
-                        var lightDome = (int) data[i].LightDomeAltitude;
-                        writer.WriteLine("{0},{1},{2}", i, lower, lightDome);
-                        }
+                        var lower = data[i].HorizonAltitude;
+                        // var lightDome = (int) data[i].LightDomeAltitude;
+                        // writer.WriteLine("{0},{1},{2}", i, lower, lightDome);
+                        writer.WriteLine("{0},{1}", i, lower);
+                    }
                     writer.Close();
                     }
                 }

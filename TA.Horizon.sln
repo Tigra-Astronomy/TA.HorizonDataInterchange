@@ -16,10 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionSharedItems", "Solu
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7CD178D6-2D7C-467F-965D-20F4BC3F4EDF}"
-	ProjectSection(SolutionItems) = preProject
-		TA.Horizon\Exporters\ObserverProExporter.cs = TA.Horizon\Exporters\ObserverProExporter.cs
-		TA.Horizon\Exporters\ObserverProExporterOptions.cs = TA.Horizon\Exporters\ObserverProExporterOptions.cs
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -35,7 +35,7 @@ namespace TA.Horizon.Importers
             var horizonData = new HorizonData();
             using (var reader = new StreamReader(source))
                 {
-                reader.ReadLine(); // Skip the header line: Azimuth,Lower,Light Dome
+                // reader.ReadLine(); // Skip the header line: Azimuth,Lower,Light Dome
                 while (!reader.EndOfStream)
                     {
                     var sourceLine = reader.ReadLine();
@@ -44,8 +44,7 @@ namespace TA.Horizon.Importers
                         throw new FormatException("Unable to parse input file (missing fields)");
                     var azimuth = int.Parse(parts[0]);
                     var horizon = double.Parse(parts[1]);
-                    var lightDome = 0;
-                    horizonData[azimuth] = new HorizonDatum(horizon, 0);
+                    horizonData[azimuth] = new HorizonDatum(horizon, horizon);
                     }
                 }
             return horizonData;
