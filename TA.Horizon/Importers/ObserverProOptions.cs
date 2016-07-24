@@ -7,9 +7,9 @@ using CommandLine;
 
 namespace TA.Horizon.Importers
     {
-    sealed class AstroplannerOptions
+    sealed class ObserverProOptions
         {
-        [Option('s',"SourceFile", Required=true, HelpText = "The CSV file name.")]
+        [Option('s',"SourceFile", Required=true, HelpText = "The hzn file name.")]
         public string SourceFile { get; set; }
         }
     }

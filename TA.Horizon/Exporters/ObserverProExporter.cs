@@ -6,9 +6,9 @@ using CommandLine;
 
 namespace TA.Horizon.Exporters
     {
-    internal class AstroPlannerExporter : IHorizonExporter
+    internal class ObserverProExporter : IHorizonExporter
         {
-        ParserResult<AstroPlannerExporterOptions> options;
+        ParserResult<ObserverProExporterOptions> options;
 
         public void ExportHorizon(HorizonData data)
             {
@@ -30,7 +30,7 @@ namespace TA.Horizon.Exporters
 
         public void ProcessCommandLineArguments(Parser parser, string[] args)
             {
-            options = parser.ParseArguments<AstroPlannerExporterOptions>(args);
+            options = parser.ParseArguments<ObserverProExporterOptions>(args);
             if (options.Errors.Any())
                 {
                 Environment.ExitCode = -1;
