@@ -5,7 +5,7 @@ namespace TA.Horizon.Exporters
     internal class TheSkyXExporterOptions
         {
         [Option('d', "DestinationFile", Required = true,
-            HelpText = "The destination file, into which the exported data is written in HZN format.")]
+            HelpText = "The destination file, into which the exported data is written in HRZ format. TheSkyX requires it to be called 'Custom Horizon.hrz' ")] //TODO: Verify this name
         public string DestinationFile { get; set; }
 
         /// <summary>

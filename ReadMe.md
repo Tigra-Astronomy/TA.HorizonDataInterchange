@@ -2,7 +2,7 @@
 
 **Horizon Data Interchange** is a command line utility for importing and exporting horizon data from various planetarium software and file formats.
 
-This version supports AstroPlanner, ObserverPro and ACP, we hope to augment this over time.
+This version supports AstroPlanner, ObserverPro, TheSkyX and ACP, we hope to augment this over time.
 
 Community involvement is welcome and encouraged. Please feel free to fork the repository, work on it yourself and send us pull requests. We've tried to make the code easy to extend, but if you can see a better way, have at it!
 
@@ -21,6 +21,7 @@ Supplying the `--help` option (or no options) will result in a help message bein
 
 10 Jan 2016 -- New feature, --UseLightDome will take the lightdome column of Astroplanner and create an ACP horizon in the ACP registry. Quit ACP before running the program. 
 24 Jul 2016 -- New feature, --UseLightDome will also work with ObserverPro
+05 Aug 2016 -- New feature, --UseLightDome will also work with TheSkyX
 
 ### Usage Example ###
 
@@ -116,6 +117,8 @@ This automatic interpolation makes the import/export process rather straightforw
 
 ObserverPro from http://www.observer.pro (Joshua Bury), allows an iOS device to create a Horizon file from the device camera. The file can be exported via email and has the text format "angle,deg.rees" 
 Angle ranges from 0 to 359 by 1, deg.rees are precise to 2 decimal places. ** This is non-round trippable data. **
+
+You will need to move the new horizon file for TheSkyX into the expected location for your version of the file. The file needs to be named 'Custom Horizon.hrz'
 
 
 *Copyright © 2015 Tigra Astronomy, all rights reserved.*
