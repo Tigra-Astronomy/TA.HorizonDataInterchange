@@ -77,13 +77,17 @@
     <Compile Include="HorizonAppSpecs.cs" />
     <Compile Include="HorizonDataSpecs.cs" />
     <Compile Include="AstroPlannerImporterSpecs.cs" />
+    <Compile Include="ObserverProExporterSpecs.cs" />
+    <Compile Include="ObserverProImporterSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="TestData\AstroPlanner.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestData\ObserverPro.hzn" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TA.Horizon\TA.Horizon.csproj">
