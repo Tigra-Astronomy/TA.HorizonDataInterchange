@@ -80,14 +80,20 @@
     <Compile Include="ObserverProExporterSpecs.cs" />
     <Compile Include="ObserverProImporterSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TheSkyXExporterSpecs.cs" />
+    <Compile Include="TheSkyXImporterSpecs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="TestData\AstroPlanner.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestData\ObserverPro.hzn" />
+    <None Include="TestData\ObserverPro.hzn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestData\TheSkyX.hrz">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TA.Horizon\TA.Horizon.csproj">
