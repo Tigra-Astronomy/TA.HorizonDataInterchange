@@ -35,16 +35,18 @@ namespace TA.Horizon.Importers
             var horizonData = new HorizonData();
             using (var reader = new StreamReader(source))
                 {
-                // reader.ReadLine(); // Skip the header line: Azimuth,Lower,Light Dome
+                reader.ReadLine(); // Skip the header line: 360
+                var azimuth = 0;
                 while (!reader.EndOfStream)
                     {
                     var sourceLine = reader.ReadLine();
-                    var parts = sourceLine.Split(',');
-                    if (parts.Length != 2) 
-                        throw new FormatException("Unable to parse input file (missing fields)");
-                    var azimuth = int.Parse(parts[0]);
-                    var horizon = double.Parse(parts[1]);
+                    //var parts = sourceLine.Split(',');
+                    //if (parts.Length != 2) 
+                    //    throw new FormatException("Unable to parse input file (missing fields)");
+                    //var azimuth = int.Parse(parts[0]);
+                    var horizon = double.Parse(sourceLine);
                     horizonData[azimuth] = new HorizonDatum(horizon, 0.0);
+                    ++azimuth;
                     }
                 }
             return horizonData;

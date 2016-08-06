@@ -202,6 +202,8 @@
     <Compile Include="Exporters\IHorizonExporter.cs" />
     <Compile Include="Exporters\ObserverProExporter.cs" />
     <Compile Include="Exporters\ObserverProExporterOptions.cs" />
+    <Compile Include="Exporters\TheSkyXExporter.cs" />
+    <Compile Include="Exporters\TheSkyXOptions.cs" />
     <Compile Include="HorizonAppOptions.cs" />
     <Compile Include="HorizonApp.cs" />
     <Compile Include="HorizonData.cs" />
@@ -212,6 +214,8 @@
     <Compile Include="Importers\IHorizonImporter.cs" />
     <Compile Include="Importers\ObserverProImporter.cs" />
     <Compile Include="Importers\ObserverProOptions.cs" />
+    <Compile Include="Importers\TheSkyXImporter.cs" />
+    <Compile Include="Importers\TheSkyXOptions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistryWriters\AcpRegistryReaderWriter.cs" />
@@ -226,7 +230,12 @@
     <None Include="SampleData\AstroPlanner.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="SampleData\ObserverPro.hzn" />
+    <None Include="SampleData\ObserverPro.hzn">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SampleData\TheSkyX.hrz">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
