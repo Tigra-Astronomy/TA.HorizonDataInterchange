@@ -2,7 +2,7 @@
 
 **Horizon Data Interchange** is a command line utility for importing and exporting horizon data from various planetarium software and file formats.
 
-The initial version supports AstroPlanner and ACP, we hope to augment this over time.
+This version supports AstroPlanner, ObserverPro, TheSkyX and ACP, we hope to augment this over time.
 
 Community involvement is welcome and encouraged. Please feel free to fork the repository, work on it yourself and send us pull requests. We've tried to make the code easy to extend, but if you can see a better way, have at it!
 
@@ -19,6 +19,10 @@ The command line requires that the user specifies exactly one importer (`-i` or 
 
 Supplying the `--help` option (or no options) will result in a help message being displayed.
 
+10 Jan 2016 -- New feature, --UseLightDome will take the lightdome column of Astroplanner and create an ACP horizon in the ACP registry. Quit ACP before running the program. 
+24 Jul 2016 -- New feature, --UseLightDome will also work with ObserverPro
+05 Aug 2016 -- New feature, --UseLightDome will also work with TheSkyX
+
 ### Usage Example ###
 
 The initial release has only one importer, which imports from an AstroPlanner horizon file in CSV format; and an ACP exporter, which writes horizon data directly to ACP's registry. The following two commands are equivalent.
@@ -31,9 +35,10 @@ Importers and Exporters may extend the command line with their own options.
 
 ### How do I get set up? ###
 
-* You'll need Visual Studio 2010 or later, we recommend Visual Studio 2013. The Community Edition is free and now allows the use of plug-ins so we also highly recommend that you get yourself a ReSharper license.
+* You'll need Visual Studio 2010 or later, we recommend Visual Studio 2015. The Community Edition is free and now allows the use of plug-ins so we also highly recommend that you get yourself a ReSharper license.
 * The code targets .Net Framework 4.5 although we haven't used any fancy features and it should work fine with any version if you need to change it.
 * Dependencies are brought in automatically as part of the build process using NuGet.
+* If you are getting errors about "CodeContracts" missing, install (https://visualstudiogallery.msdn.microsoft.com/1ec7db13-3363-46c9-851f-1ce455f66970 "CodeContracts")
 * We use MSpec (Machine.Specifications) for our unit tests and FakeItEasy as our mocking framework. We are happy to accept any testing/mocking framework if you have a strong preference, as long as we can support it on our TeamCity build server and it doesn't exclude other developers (e.g. by having an expensive license fee).
 * This is a simple utility, we will use [XCOPY deployment](http://en.wikipedia.org/wiki/XCOPY_deployment "Wikipedia"). No need for an installer, just copy the compiled files and run. Because of this, everything needed to run the utility must ship with it to maintain 'XCOPY deployment'. Please don't reference anything outside the project, or users will have a hard time ensuring they have the right dependencies to use the utility. It must be possible to simply XCopy the bin directory.
 * If you are new to Git, may we suggest [Atlassian's SourceTree](http://www.sourcetreeapp.com/download/ "SourceTree download") utility? It's free, works on Windows and Mac and can use both Git and Mercurial. It has both a graphical user interface and a command prompt if you prefer that, and it has its own bundled versions of Git and Mercurial, so it is absolutely everything you need.
@@ -47,12 +52,12 @@ Importers and Exporters may extend the command line with their own options.
 
 * Please try to write Clean Code and stick to the SOLID principles of object oriented design.
 * We use ***GitFlow*** as our branching strategy, it has worked very well for us across a number of projects. The bare minimum you must know about GitFlow to get started is:
-	* The `master` branch is reserved for releases. Commits to `master` are forbidden, except to merge a `release/*` branch.
+	* The `master` branch is reserved for releases. Commits to `master` are forbidden, except to merge a `release/*` branch which will normally be done by Tigra Astronomy.
 	* Development happens on the `develop` branch, or preferably a feature branch off develop. Feature branches are conventionally named `feature/*`.
-	* As far as possible, do one self-contained feature or bugfix per branch and then merge it back into `develop`.
+	* As far as possible, do one self-contained feature or bugfix per branch and then create a pull request to merge it back into `develop`, allowing time for code review.
 	* Find out all the gory details at [http://nvie.com/posts/a-successful-git-branching-model/](http://nvie.com/posts/a-successful-git-branching-model/ "GitFlow - a successful Git branching strategy")
 	* We are not a fan of rebasing. We prefer to push everything, so everyone can see what happened.
-* If you commit *binaries* or *build artefacts* to the ***source code*** repository, or create any folders containing the words 'copy', 'backup', 'old' or a version number, then we will hunt you down and give you the wedgie you deserve! We've seen people do all of the above and it reveals a singular lack of understanding about what a version control system does! Please think about what you commit.
+* If you commit *binaries* or *build artefacts* to the ***source code*** repository, or create any folders containing the words 'copy', 'backup', 'old' or a version number, then we will hunt you down and give you the wedgie you deserve! We've seen people do all of the above and it reveals a singular lack of understanding about what a version control system does! Please think about what you commit and only commit source code, not build artefacts nor anything that is specific to you or your computer.
 
 
 ### Who do I talk to? ###
@@ -110,6 +115,10 @@ This automatic interpolation makes the import/export process rather straightforw
 
 **Important**: Due to the fact that different programs and file formats use different azimuth resolutions and some applications use integer values for altitude, data is not necessarily round-trippable. Whenever data is moved from a higher resolution source to a lower resolution source, information loss occurs; when data is moved from a lower resolution source to a higher resolution source, interpolation occurs which introduces quantisation noise into the data. Therefore, it is best to pick one data source as being 'authoritative' and then only export from that source.
 
+ObserverPro from http://www.observer.pro (Joshua Bury), allows an iOS device to create a Horizon file from the device camera. The file can be exported via email and has the text format "angle,deg.rees" 
+Angle ranges from 0 to 359 by 1, deg.rees are precise to 2 decimal places. ** This is non-round trippable data. **
+
+You will need to move the new horizon file for TheSkyX into the expected location for your version of the file. The file needs to be named 'Custom Horizon.hrz'
 
 
 *Copyright © 2015 Tigra Astronomy, all rights reserved.*

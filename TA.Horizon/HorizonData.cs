@@ -18,7 +18,7 @@ namespace TA.Horizon
             {
             get
                 {
-                Contract.Requires<InvalidOperationException>(Count > 0,
+                Contract.Requires(Count > 0,
                     "There must be at least one value in the horizon data before it can be queried");
                 return InterpolatedHorizonValueForAzimuth(index);
                 }
@@ -63,14 +63,19 @@ namespace TA.Horizon
                 upperKey = lowerOrEqualKeys.First();
                 upperKeyAzimuth = 360 + upperKey;
                 }
-            var lowerValue = base[lowerKey].HorizonAltitude;
-            var upperValue = base[upperKey].HorizonAltitude;
+            var interpolatedHorizon = InterpolatedValue(index, base[lowerKey].HorizonAltitude, base[upperKey].HorizonAltitude, lowerKeyAzimuth, upperKeyAzimuth);
+            var interpolatedLightDome = InterpolatedValue(index, base[lowerKey].LightDomeAltitude, base[upperKey].LightDomeAltitude, lowerKeyAzimuth, upperKeyAzimuth);
+            return new HorizonDatum(interpolatedHorizon, interpolatedLightDome);
+            }
+
+        double InterpolatedValue(int index, double lowerValue, double upperValue, int lowerKeyAzimuth, int upperKeyAzimuth)
+            {
             var azimuthDelta = upperKeyAzimuth - lowerKeyAzimuth; // Takes account of any 'wrap'.
             var valueDelta = upperValue - lowerValue;
-            var slope = valueDelta/azimuthDelta;
+            var slope = valueDelta / azimuthDelta;
             var indexOffset = index - lowerKeyAzimuth;
-            var interpolatedValue = lowerValue + indexOffset*slope; // y = mx + c, equation of a straight line.
-            return new HorizonDatum(interpolatedValue, 0.0);
+            var interpolatedValue = lowerValue + indexOffset * slope; // y = mx + c, equation of a straight line.
+            return interpolatedValue;
             }
         }
     }
