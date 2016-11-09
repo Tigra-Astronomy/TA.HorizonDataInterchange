@@ -17,9 +17,9 @@ using System.Runtime.InteropServices;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("0.0.*")]
-[assembly: AssemblyFileVersion("0.0.0")]
-[assembly : AssemblyInformationalVersion("0.0.0 uncontrolled build")]
+[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyFileVersion("1.0.0")]
+[assembly : AssemblyInformationalVersion("1.0.0")]
 
 
 [assembly: InternalsVisibleTo("TA.Horizon.Specifications")]
